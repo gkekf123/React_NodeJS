@@ -1,31 +1,42 @@
-import { Fragment } from "react";
-import MyComponent from "./component/MyComponent";
-import MyComponent2 from "./component/MyComponent2";
-import MyComponent3 from "./component/MyComponent3";
+import { Fragment, useState } from "react";
+import HookEffect from "./hook/HookEffect";
+import HookRef from "./hook/HookRef";
+import HookQ from "./hook/HookQ";
+import HookReducer from "./hook/HookReducer";
 
 function App() {
+  // 보이기 버튼 숨김 - unmount값 확인
+  const [visible, setVisible] = useState(true);
+
+  const handleVisible = () => {
+    setVisible(!visible);
+  };
+
+  console.log(visible);
+
   return (
     <Fragment>
-      <div>나의 새로운 컴포넌트</div>
+      <button onClick={handleVisible}>{visible ? "숨기기" : "보이기"}</button>
+      {visible ? <HookEffect /> : null}
+
       <br />
-      <MyComponent
-        name={"홍길동"}
-        age={20}
-        addr={"서울시"}
-        email={"상위@naver.com"}
-      />{" "}
-      {/* props */}
+      <hr />
       <br />
-      <MyComponent name={"이순신"} age={30} addr={"경기도"} />
+
+      <HookRef />
+
       <br />
-      {/* 클래스형 컴포넌트 */}
-      <MyComponent2 name={"신사임당"} age={40} />
-      {/* 함수형 컴포넌트 MyComponent3를 생성
-      props는 title, content, writer를 전달
-      writer는 기본값은 admin으로 선언 */}
-      <MyComponent3 title={"안녕"} content={"뭘봐"} />
+      <hr />
+      <br />
+
+      <HookQ />
+
+      <br />
+      <hr />
+      <br />
+
+      <HookReducer />
     </Fragment>
   );
 }
-
-export default App; // index.js가 사용하고 있기 때문
+export default App;
